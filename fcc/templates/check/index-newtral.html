@@ -1,0 +1,26 @@
+{# /fcc/templates/check/index-newtral.html #}
+
+{% extends 'page/layout.html' %}
+{% from 'macros/cards.html' import newtral_Card %}
+
+
+{% block content %}
+<div class="index">
+    <h1>Newtral</h1>
+
+    <img class="org-logo" src="https://ifcncodeofprinciples.poynter.org/storage/logos/newtral_logo.png?v=1684322726" alt="Newtral logo">
+
+    <p>Country: {{ organization.country }}
+    <br>
+    Website: <a href="{{ organization.site_url }}">{{ organization.site_url|strip_http }}</a>
+    </p>
+    
+    <h2 style="clear: right">Latest Fact-Checks</h2>
+    
+    <div class="check-card-grid">
+        {% for c in checks %}
+            {{ newtral_Card(c) }}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

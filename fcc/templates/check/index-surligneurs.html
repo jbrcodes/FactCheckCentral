@@ -1,0 +1,26 @@
+{# /fcc/templates/check/index-surligneurs.html #}
+
+{% extends 'page/layout.html' %}
+{% from 'macros/cards.html' import surligneurs_Card %}
+
+
+{% block content %}
+<div class="index">
+    <h1>Les Surligneurs</h1>
+
+    <img class="org-logo" src="https://ifcncodeofprinciples.poynter.org/storage/logos/les-surligneurs_logo.png" alt="Les Surligneurs logo">
+
+    <p>Country: {{ organization.country }}
+    <br>
+    Website: <a href="{{ organization.site_url }}">{{ organization.site_url|strip_http }}</a>
+    </p>
+    
+    <h2 style="clear: right">Latest Fact-Checks</h2>
+    
+    <div class="check-card-grid">
+        {% for c in checks %}
+            {{ surligneurs_Card(c) }}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

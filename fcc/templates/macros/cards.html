@@ -1,0 +1,134 @@
+{# /fcc/templates/macros/cards.html #}
+
+
+{% macro dpa_Card(ch) %}
+<a href="{{ ch.stmt_url }}" target="_blank" title="Go to DPA">
+    <div class="CheckCard border rounded-2">
+        <div class="scrollable">
+            <div class="date">{{ ch.stmt_date_locale }}</div>
+            <div class="stmt">{{ ch.stmt_text }}</div>
+            <div class="summary">{{ ch.misc }}</div>
+        </div>
+
+        <div class="bottom">
+            <span></span>
+
+            <span class="btn btn-primary btn-sm" href="#">
+                go...
+                <i class="bi bi-box-arrow-up-right"></i> 
+            </span>
+        </div>
+    </div>
+</a>
+{% endmacro %}
+
+
+{% macro newtral_Card(ch) %}
+<a href="{{ ch.stmt_url }}" target="_blank" title="Go to Newtral">
+    <div class="CheckCard border rounded-2">
+        <div class="scrollable">
+            <div class="date">{{ ch.stmt_date_locale }}</div>
+            <div class="stmt">{{ ch.stmt_text }}</div>
+            <div class="author">
+                <span>&mdash;</span>
+                {{ ch.author_name }}
+                <div class="author-title">{{ ch.author_title }}</div>
+            </div>
+        </div>
+
+        <div class="bottom">
+            <span class="rating">
+                <i class="bi bi-hand-index"></i>
+                {{ ch.rating }}
+            </span>
+
+            <span>
+                <span class="btn btn-primary btn-sm" href="#">
+                    go...
+                    <i class="bi bi-box-arrow-up-right"></i> 
+                </span>
+            </span>
+        </div>
+    </div>
+</a>
+{% endmacro %}
+
+
+{% macro politifact_Card(ch) %}
+<a href="{{ ch.stmt_url }}" target="_blank" title="Go to PolitiFact">
+    <div class="CheckCard border rounded-2">
+        <div class="scrollable">
+            <div class="date">{{ ch.stmt_date_locale }}</div>
+            <div class="stmt">{{ ch.stmt_text }}</div>
+            <div class="author">
+                <span>&mdash;</span>
+                {{ ch.author_name }}
+            </div>
+        </div>
+
+        <div class="bottom">
+            <span class="rating">
+                <i class="bi bi-hand-index"></i>
+                {{ ch.rating }}
+            </span>
+
+            <span>
+                <span class="btn btn-primary btn-sm" href="#">
+                    go...
+                    <i class="bi bi-box-arrow-up-right"></i>
+                </span>
+            </span>
+        </div>
+    </div>
+</a>
+{% endmacro %}
+
+
+{% macro snopes_Card(ch) %}
+<a href="{{ ch.stmt_url }}" target="_blank" title="Go to Snopes">
+    <div class="CheckCard border rounded-2">
+        <div class="scrollable">
+            <div class="date">{{ ch.stmt_date_locale }}</div>
+            <div class="stmt">{{ ch.stmt_text }}</div>
+            <div class="summary">{{ ch.misc }}</div>
+        </div>
+
+        <div class="bottom">
+            <span>
+                <i class="bi bi-hand-index"></i>
+                {{ ch.rating }}
+            </span>
+
+            <span class="btn btn-primary btn-sm" href="#">
+                go...
+                <i class="bi bi-box-arrow-up-right"></i> 
+            </span>
+        </div>
+    </div>
+</a>
+{% endmacro %}
+
+
+{% macro surligneurs_Card(ch) %}
+<a href="{{ ch.stmt_url }}" target="_blank" title="Go to Les Surligneurs">
+    <div class="CheckCard border rounded-2">
+        <div class="scrollable">
+            <div class="date">{{ ch.stmt_date_locale }}</div>
+            <div class="stmt">{{ ch.stmt_text }}</div>
+            <div class="summary">{{ ch.misc }}</div>
+        </div>
+
+        <div class="bottom">
+            <span>
+                <i class="bi bi-hand-index"></i>
+                {{ ch.rating }}
+            </span>
+
+            <span class="btn btn-primary btn-sm" href="#">
+                go...
+                <i class="bi bi-box-arrow-up-right"></i> 
+            </span>
+        </div>
+    </div>
+</a>
+{% endmacro %}

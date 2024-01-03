@@ -1,0 +1,40 @@
+{# /fcc/templates/page/home.html #}
+
+{% extends 'page/layout.html' %}
+{% import 'macros/cards.html' as card_macros %}
+
+
+{% block css %}
+h3 {
+    margin: 0;
+}
+
+.foo {
+    margin: 3em 0 1em 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: .5em;
+}
+{% endblock %}
+
+
+{% block content %}
+<h1>Home</h1>
+
+<h2>Latest Fact-Checks</h2>
+
+{% for org in orgs %}
+    <div class="foo">
+        <h3>{{ org.name }} ({{ org.country }})</h3>
+        <a class="btn btn-primary btn-sm" href="/checks/{{org.slug}}">more...</a>
+    </div>
+
+    <div class="check-card-grid">
+        {% set macro_name = org.slug ~ '_Card' %}
+        {% for card in cards[org.slug] %}
+            {{ card_macros[macro_name](card) }}
+        {% endfor %}
+    </div>
+{% endfor %}
+{% endblock %}
