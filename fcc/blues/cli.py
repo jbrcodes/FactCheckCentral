@@ -46,7 +46,7 @@ def scrape(args):
 
         # Dynamically load corresponding Scraper class
         # https://stackoverflow.com/a/4821120
-        module_name = f'fcc.blues.{org.class_name}.{org.class_name}Scraper'
+        module_name = f'fcc.blues.scraper.{org.class_name}Scraper'
         module = importlib.import_module(module_name)
         class_ = getattr(module, f'{org.class_name}Scraper')
         

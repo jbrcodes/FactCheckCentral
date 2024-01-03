@@ -1,9 +1,9 @@
-# /fcc/blues/PolitiFact/PolitiFactScraper.py
+# /fcc/blues/scraper/PolitiFactScraper.py
 
 from datetime import datetime
 import re
 
-from fcc.lib.BaseScraper import BaseScraper
+from fcc.blues.scraper.BaseScraper import BaseScraper
 
 
 Rating_Strings = {

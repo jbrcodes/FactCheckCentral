@@ -1,9 +1,9 @@
-# /fcc/blues/Snopes/SnopesScraper.py
+# /fcc/blues/scraper/SnopesScraper.py
 
 from datetime import datetime
 import re
 
-from fcc.lib.BaseScraper import BaseScraper
+from fcc.blues.scraper.BaseScraper import BaseScraper
 
 
 class SnopesScraper(BaseScraper):

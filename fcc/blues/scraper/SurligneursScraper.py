@@ -1,9 +1,9 @@
-# /fcc/blues/Surligneurs/SurligneursScraper.py
+# /fcc/blues/scraper/SurligneursScraper.py
 
 from datetime import datetime
 import re
 
-from fcc.lib.BaseScraper import BaseScraper
+from fcc.blues.scraper.BaseScraper import BaseScraper
 
 
 class SurligneursScraper(BaseScraper):

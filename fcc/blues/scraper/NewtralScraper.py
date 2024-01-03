@@ -1,9 +1,9 @@
-# /fcc/blues/Newtral/NewtralScraper.py
+# /fcc/blues/scraper/NewtralScraper.py
 
 from datetime import datetime
 import re
 
-from fcc.lib.BaseScraper import BaseScraper
+from fcc.blues.scraper.BaseScraper import BaseScraper
 
 
 class NewtralScraper(BaseScraper):

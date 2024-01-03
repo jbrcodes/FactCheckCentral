@@ -1,4 +1,4 @@
-# /fcc/lib/BaseScraper.py
+# /fcc/blues/scraper/BaseScraper.py
 
 from datetime import date
 import locale

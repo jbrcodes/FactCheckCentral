@@ -1,9 +1,9 @@
-# /fcc/blues/DPA/DPAScraper.py
+# /fcc/blues/scraper/DPAScraper.py
 
 from datetime import datetime
 import re
 
-from fcc.lib.BaseScraper import BaseScraper
+from fcc.blues.scraper.BaseScraper import BaseScraper
 
 
 class DPAScraper(BaseScraper):

@@ -8,3 +8,5 @@ logs/
 
 JupyterLab/
 NOTES.md
+
+.flaskenv
