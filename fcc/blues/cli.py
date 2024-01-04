@@ -79,3 +79,8 @@ def _get_orgs_to_scrape(args):
                 click.echo(f"warning: '{slug}' does not exist; skipping")
 
     return orgs_to_scrape
+
+
+@bp.cli.command('mom')
+def mom():
+    print('Hi Mom!')
