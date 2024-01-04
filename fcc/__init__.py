@@ -6,9 +6,11 @@ from flask import Flask
 
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_pyfile('config.py')
-    if not app.config['DEBUG']:
-        app.config.from_pyfile('live_config.py')
+    app.config.from_pyfile('config_all.py')
+    if app.config['DEBUG']:
+        app.config.from_pyfile('config_dev.py')
+    else:
+        app.config.from_pyfile('config_live.py')
 
     #
     # Database
@@ -41,12 +43,5 @@ def create_app():
         from unidecode import unidecode
         str1 = unidecode(str).lower()
         return re.sub(r'\s+', '-', str1)
-    
-    #
-    # Don't ask... :-}
-    #
-
-    from fcc.lib.FileCache import FileCache
-    FileCache.cache_path = app.config['FILE_CACHE_DIR']
 
     return app

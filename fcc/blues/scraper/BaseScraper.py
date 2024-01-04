@@ -5,6 +5,8 @@ import locale
 import logging
 import time
 
+from flask import current_app
+
 from playwright.sync_api import sync_playwright
 
 from fcc.models import db, Check
@@ -21,7 +23,12 @@ class BaseScraper:
         self.browser = None
         self.page = None
         self.org = None
-        self.useCache = True
+
+        if 'FILE_CACHE_DIR' in current_app.config:
+            FileCache.cache_path = current_app.config['FILE_CACHE_DIR']
+            self.useCache = True
+        else:
+            self.useCache = False
 
 
     def init(self):
