@@ -1,6 +1,6 @@
 {# /fcc/templates/page/home.html #}
 
-{% extends 'layout.html' %}
+{% extends 'layout-home.html' %}
 {% import 'macros/cards.html' as card_macros %}
 
 {%
@@ -15,47 +15,96 @@
 
 
 {% block css %}
-h3 {
-    margin: 0;
+h2 {
+    margin-top: 2em;
+    padding: 10px;
+
+    background-color: #D2E3C8; /* light */
+    color: #333;
 }
 
-.foo {
-    margin: 3em 0 1em 0;
+.org-block {
+    margin: 2em 0;
+}
+
+.org-info {
     display: flex;
     justify-content: space-between;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: .5em;
+    margin-bottom: 1em;
 }
 
-#jumbotron {
+.org-info img {
+    height: 100px;
+    width: auto;
+}
+
+@media screen and (min-width: 700px) {
+    .org-info img {
+        height: 150px;
+    }
+}
+
+#jumbo {
+    background-color: #4F6F52;  /* dark */
+    color: #eee;
+    font-family: 'EB Garamond', serif;
+}
+
+#jumbo-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    background-color: rgba(0, 0, 255, .25);
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    margin-bottom: 30px;
+    padding: 50px 20px;
+}
+
+@media screen and (min-width: 700px) {
+    #jumbo-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
 }
 
 #spruch {
-    font-size: 5em;
-    text-align: right;
+    font-weight: 600;
+    font-size: 4em;
+    line-height: .9em;
+}
+
+#smalltext {
+    font-weight: 400;
+    font-size: 1.5em;
+    line-height: 1.6em;
 }
 {% endblock %}
 
+{% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>Home</h1>
+<div id="jumbo">
+    <div id="jumbo-grid" class="jbr-container">
+        <span id="spruch">Facts Matter</span>
 
-<div id="jumbotron">
-    <span></span>
-    <span id="spruch">Facts <br> Matter</span>
+        <span id="smalltext">
+            Democracies work best when their citizens are well informed.
+            Organizations like the ones below investigate statements and rumors,
+            and publish their results for the benefit of we citizens.
+        </span>
+    </div>
 </div>
 
-<h2>Latest Fact-Checks</h2>
-
-{% for org in orgs %}
+<div class="jbr-container">
+    {% for org in orgs %}
     <div class="org-block">
-        <div class="foo">
-            <h3>{{ org.name }}</h3>
-            <div>Country: {{ org.country }}</div>
-            <a href="{{ org.site_url }}">{{ org.site_url|strip_http }}</a>
+        <h2>{{ org.name }}</h2>
+        <div class="org-info">
+            <div>
+                <div>Country: {{ org.country }}</div>
+                Website: <a href="{{ org.site_url }}">{{ org.site_url|strip_http }}</a>
+            </div>
+
+            <img src="{{ org_logos[org.slug] }}" alt="{{ org.name }} logo">
         </div>
 
         <div class="check-card-grid">
@@ -66,4 +115,5 @@ h3 {
         </div>
     </div>
 {% endfor %}
+</div>
 {% endblock %}

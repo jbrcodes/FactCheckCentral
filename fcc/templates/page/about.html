@@ -1,28 +1,92 @@
 {% extends 'layout.html' %}
 
+
+{% block css %}
+.about {
+    line-height: 1.75em;
+}
+
+header {
+    margin-bottom: 3em;
+}
+
+h2 {
+    margin-top: 1em;
+    border-bottom: 4px solid #D2E3C8; /* light */
+}
+
+a {
+    color: #4F6F52;  /* dark */
+}
+
+@media screen and (min-width: 1000px) {
+    .two-col {
+        columns: 2;
+        column-gap: 50px;
+    }
+}
+{% endblock %}
+
+
+{% block title %}About{% endblock %}
+
+
 {% block content %}
 <div class="about">
-    <h1>About</h1>
+    <h2>This Website</h2>
 
-    <h2>The Site</h2>
+    <div class="two-col">
+        <p>
+            This website, informally called Fact-Check Central, regularly retrieves 
+            fact-checking information from a selection of fact-checking websites.
+            The contents of this website are updated several times a week.
+            Clicking on an entry will take you to the corresponding page
+            on the fact-checking site.
+        </p>
+        <p>
+            The format in which statements and their "truthfulness" ratings are published differs
+            between fact-checking websites. Some will publish the original statement, the source, and the
+            fact-checker's conclusion from a strict number of options, such as:
+            true, false or misleading. Other websites take a less structured approach.
+            The different formats of the excerpts displayed here reflects that variation in formats.
+        </p>
+        <p>
+            The selected fact-checking websites are visited and checked for new entries
+            using a technique called 
+            <a href="https://en.wikipedia.org/wiki/Web_scraping"><em>web scraping</em></a>.
+            <em>Scraping</em> a web page consists of automating the visiting of the page, 
+            without human intervention. This site displays the most recent entries from
+            fact-checking sites; 
+        </p>
+    </div>
 
-    <p>Each org places different info on their websites, therefore what
-        I display is not always the same.
-    </p>
-
-    <p>THIS IS A DEMO.</p>
 
     <h2>The IFCN</h2>
+    <div class="two-col">
+        <p>
+            The 
+            <a href="https://ifcncodeofprinciples.poynter.org">International Fact-Checking Network (IFCN)</a> is a creation of the
+            <a href="https://www.poynter.org">Poynter Institute</a>.
+            The IFCN has created a code of principles
+            "...for organizations that regularly publish nonpartisan reports on the accuracy of statements by public figures, major institutions, and other widely circulated claims of interest to society."
+        </p>
+        <p>
+            Signatories of the IFCN code of principles agree to abide by the code, and submit to yearly independent assessments
+            to retain their signatory status.
+            Organizations that appear on this website were chosen from the IFCN
+            <a href="https://ifcncodeofprinciples.poynter.org/signatories">list of signatories</a>.
+        </p>
+    </div>
 
-    <p>About the
-        <a href="https://ifcncodeofprinciples.poynter.org/signatories">signatories</a>...
-    </p>
-
-    <h2>The Tech</h2>
-
+    <h2>Technology Used</h2>
     <p>
-        Flask, Postgres, SQLAlchemy, JupyterLab, Playwright...
+        The following technologies were used for this website:
     </p>
+    <ul>
+        <li><a href="https://flask.palletsprojects.com">Flask</a></li>
+        <li><a href="https://www.sqlalchemy.org">SQLAlchemy</a></li>
+        <li><a href="https://www.postgresql.org">Postgres</a></li>
+        <li><a href="https://playwright.dev/python/">Playwright</a></li>
+    </ul>
 </div>
-
 {% endblock %}
