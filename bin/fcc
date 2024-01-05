@@ -17,7 +17,7 @@ if [ `hostname` = "pizarra-1.home" ]
 then
     source venv-flask/bin/activate
 else
-    source env/bin/activate
+    source ../env/bin/activate
 fi
 
 # Let's go!
