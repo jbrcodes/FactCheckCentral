@@ -39,24 +39,18 @@ a {
         <p>
             This website, informally called Fact-Check Central, regularly retrieves 
             fact-checking information from a selection of fact-checking websites.
-            The contents of this website are updated several times a week.
+            The contents of this website are automatically updated several times a week.
             Clicking on an entry will take you to the corresponding page
             on the fact-checking site.
         </p>
         <p>
-            The format in which statements and their "truthfulness" ratings are published differs
+            The format in which statements and their 
+            "<a href="https://www.wordnik.com/words/truthiness">truthiness</a>" 
+            ratings are published varies
             between fact-checking websites. Some will publish the original statement, the source, and the
             fact-checker's conclusion from a strict number of options, such as:
             true, false or misleading. Other websites take a less structured approach.
-            The different formats of the excerpts displayed here reflects that variation in formats.
-        </p>
-        <p>
-            The selected fact-checking websites are visited and checked for new entries
-            using a technique called 
-            <a href="https://en.wikipedia.org/wiki/Web_scraping"><em>web scraping</em></a>.
-            <em>Scraping</em> a web page consists of automating the visiting of the page, 
-            without human intervention. This site displays the most recent entries from
-            fact-checking sites.
+            The different formats of the entries displayed here reflects that diversity in formats.
         </p>
     </div>
 
@@ -79,14 +73,24 @@ a {
     </div>
 
     <h2>Technology Used</h2>
-    <p>
-        The following technologies were used for Fact-Check Central:
-    </p>
-    <ul>
-        <li><a href="https://flask.palletsprojects.com">Flask</a></li>
-        <li><a href="https://www.sqlalchemy.org">SQLAlchemy</a></li>
-        <li><a href="https://www.postgresql.org">Postgres</a></li>
-        <li><a href="https://playwright.dev/python/">Playwright</a></li>
-    </ul>
+    <div class="two-col">
+        <p>
+            The selected fact-checking websites are regularly visited and checked for new entries
+            using a technique called 
+            <a href="https://en.wikipedia.org/wiki/Web_scraping"><em>web scraping</em></a>.
+            Scraping a web page consists of automating the fetching of the page, 
+            without human intervention. Portions of the page
+            (determined by an earlier analysis of the page's structure) are then saved.
+        </p>
+        <p>
+            The following technologies were used to develop Fact-Check Central:
+        </p>
+        <ul>
+            <li><a href="https://flask.palletsprojects.com">Flask</a></li>
+            <li><a href="https://www.sqlalchemy.org">SQLAlchemy</a></li>
+            <li><a href="https://www.postgresql.org">Postgres</a></li>
+            <li><a href="https://playwright.dev/python/">Playwright</a></li>
+        </ul>
+    </div>
 </div>
 {% endblock %}
