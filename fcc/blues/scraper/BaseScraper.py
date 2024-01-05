@@ -15,7 +15,8 @@ from fcc.lib.FileCache import FileCache
 
 class BaseScraper:
     
-    FC_SCRAPE_COUNT = 6
+    SCRAPE_DETAIL_MAX = 10  # scrape at most the 10 most recent detail pages
+    DETAIL_DELAY_SECS = 3  # wait this long before scraping next detail page
 
 
     def __init__(self): 
@@ -24,6 +25,7 @@ class BaseScraper:
         self.page = None
         self.org = None
 
+        # Useful for dev and testing
         if 'FILE_CACHE_DIR' in current_app.config:
             FileCache.cache_path = current_app.config['FILE_CACHE_DIR']
             self.useCache = True
@@ -47,6 +49,7 @@ class BaseScraper:
     def scrape(self, org):
         self.org = org
         index_items = self._scrape_page('index', org.scrape_url)
+        index_items = index_items[:self.SCRAPE_DETAIL_MAX]
         logging.info('%d items scraped', len(index_items))
         new_items = self._filter_new_items(index_items)
         tweaked_items = self._pre_save_items(new_items)
@@ -60,7 +63,7 @@ class BaseScraper:
             obj = FileCache.get(url)
         if obj is None:
             if type == 'detail':
-                time.sleep(2)  # let's pause...
+                time.sleep(self.DETAIL_DELAY_SECS)  # let's pause...
             self.page.goto(url)
             self._wait_for_page_load(type)
             if type == 'index':

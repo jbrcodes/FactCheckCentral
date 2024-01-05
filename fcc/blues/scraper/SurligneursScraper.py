@@ -21,7 +21,7 @@ class SurligneursScraper(BaseScraper):
             item['stmt_date_iso'] = ''  # from detail page
 
             # summary
-            item['misc'] = 'zz'  # from detail page
+            item['misc'] = ''  # from detail page
 
             # rating
             item['rating'] = grid_item.query_selector('button').text_content()

@@ -10,8 +10,7 @@ class NewtralScraper(BaseScraper):
 
     def _scrape_index_page(self):
         all_items = []
-        selector = f'section.s-verification-cards div[id^="item"]:nth-child(-n + {self.FC_SCRAPE_COUNT})'
-        cards = self.page.query_selector_all(selector)
+        cards = self.page.query_selector_all('section.s-verification-cards div[id^="item"]')
         for card in cards:
             item = {}
 

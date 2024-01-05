@@ -20,7 +20,7 @@ class PolitiFactScraper(BaseScraper):
 
     def _scrape_index_page(self):
         all_items = []
-        articles = self.page.query_selector_all(f'li.o-listicle__item:nth-child(-n + {self.FC_SCRAPE_COUNT})')
+        articles = self.page.query_selector_all('li.o-listicle__item')
         for art in articles:
             item = {}
 

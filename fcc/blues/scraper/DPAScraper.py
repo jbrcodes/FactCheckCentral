@@ -31,9 +31,8 @@ class DPAScraper(BaseScraper):
             
             all_items.append(item)
 
-        # Now get some more from list of (over 2K!) remaining items
-        selector = f'.article-list tr:nth-child(-n + {self.FC_SCRAPE_COUNT - 3})'
-        articles = self.page.query_selector_all(selector)
+        # Now get just a few more from list of (over 2K!) remaining items
+        articles = self.page.query_selector_all(f'.article-list tr:nth-child(-n + 10)')
         for art in articles:
             item = {}
 

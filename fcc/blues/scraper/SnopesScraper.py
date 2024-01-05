@@ -11,8 +11,7 @@ class SnopesScraper(BaseScraper):
     def _scrape_index_page(self):
         all_items = []
 
-        selector = f'#list_template_wrapper .article_wrapper:nth-child(-n + {self.FC_SCRAPE_COUNT})'
-        articles = self.page.query_selector_all(selector)
+        articles = self.page.query_selector_all('#list_template_wrapper .article_wrapper')
         for art in articles:
             item = {}
 
