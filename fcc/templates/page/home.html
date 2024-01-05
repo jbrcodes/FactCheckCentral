@@ -3,6 +3,16 @@
 {% extends 'layout.html' %}
 {% import 'macros/cards.html' as card_macros %}
 
+{%
+    set org_logos = {
+        'dpa': 'https://ifcncodeofprinciples.poynter.org/storage/logos/dpa-deutsche-presse-agentur-gmbh_logo.png',
+        'newtral': 'https://ifcncodeofprinciples.poynter.org/storage/logos/newtral_logo.png',
+        'politifact': 'https://ifcncodeofprinciples.poynter.org/storage/logos/politifact_logo.png',
+        'snopes': 'https://ifcncodeofprinciples.poynter.org/storage/logos/snopescom_logo.png',
+        'surligneurs': 'https://ifcncodeofprinciples.poynter.org/storage/logos/les-surligneurs_logo.png'
+    }
+%}
+
 
 {% block css %}
 h3 {
@@ -16,25 +26,44 @@ h3 {
     border-bottom: 2px solid #ccc;
     padding-bottom: .5em;
 }
+
+#jumbotron {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgba(0, 0, 255, .25);
+}
+
+#spruch {
+    font-size: 5em;
+    text-align: right;
+}
 {% endblock %}
 
 
 {% block content %}
 <h1>Home</h1>
 
+<div id="jumbotron">
+    <span></span>
+    <span id="spruch">Facts <br> Matter</span>
+</div>
+
 <h2>Latest Fact-Checks</h2>
 
 {% for org in orgs %}
-    <div class="foo">
-        <h3>{{ org.name }} ({{ org.country }})</h3>
-        <a class="btn btn-primary btn-sm" href="/checks/{{org.slug}}">more...</a>
-    </div>
+    <div class="org-block">
+        <div class="foo">
+            <h3>{{ org.name }}</h3>
+            <div>Country: {{ org.country }}</div>
+            <a href="{{ org.site_url }}">{{ org.site_url|strip_http }}</a>
+        </div>
 
-    <div class="check-card-grid">
-        {% set macro_name = org.slug ~ '_Card' %}
-        {% for card in cards[org.slug] %}
-            {{ card_macros[macro_name](card) }}
-        {% endfor %}
+        <div class="check-card-grid">
+            {% set macro_name = org.slug ~ '_Card' %}
+            {% for card in cards[org.slug] %}
+                {{ card_macros[macro_name](card) }}
+            {% endfor %}
+        </div>
     </div>
 {% endfor %}
 {% endblock %}

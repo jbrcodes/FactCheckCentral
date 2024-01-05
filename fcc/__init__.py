@@ -27,8 +27,6 @@ def create_app():
     app.register_blueprint(routes_bp)
     from fcc.blues.cli import bp as cli_bp
     app.register_blueprint(cli_bp)
-    from fcc.blues.checks import bp as checks_bp
-    app.register_blueprint(checks_bp)
 
     #
     # Template Filters
@@ -37,11 +35,5 @@ def create_app():
     @app.template_filter('strip_http')
     def strip_http(url):
         return re.sub(r'^https?://', '', url)
-    
-    @app.template_filter('to_css_class')
-    def to_css_class(str):
-        from unidecode import unidecode
-        str1 = unidecode(str).lower()
-        return re.sub(r'\s+', '-', str1)
 
     return app

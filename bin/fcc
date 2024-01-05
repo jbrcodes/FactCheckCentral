@@ -15,9 +15,9 @@ cd $SCRIPTDIR/..
 # Activate venv (fragile!)
 if [ `hostname` = "pizarra-1.home" ]
 then
-    . venv-flask/bin/activate
+    source venv-flask/bin/activate
 else
-    . env/bin/activate
+    source env/bin/activate
 fi
 
 # Let's go!

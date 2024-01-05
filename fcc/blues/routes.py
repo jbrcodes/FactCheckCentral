@@ -20,7 +20,7 @@ def home():
             db.select(Check)
                 .filter_by(organization_id=org.id)
                 .order_by(Check.stmt_date_iso.desc(), Check.id)
-                .limit(3)
+                .limit(6)
         ).scalars()
         cards[org.slug] = list(result)
 
