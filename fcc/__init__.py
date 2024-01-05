@@ -10,7 +10,7 @@ def create_app():
     if app.config['DEBUG']:
         app.config.from_pyfile('config_dev.py')
     else:
-        app.config.from_pyfile('config_live.py')
+        app.config.from_pyfile('config_prod.py')
 
     #
     # Database
