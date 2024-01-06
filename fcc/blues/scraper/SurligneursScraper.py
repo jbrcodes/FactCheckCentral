@@ -12,7 +12,7 @@ class SurligneursScraper(BaseScraper):
         all_items = []
 
         grid_items = self.page.query_selector_all(f'#grid .grid-item')
-        for grid_item in grid_items[:self.FC_SCRAPE_COUNT]:
+        for grid_item in grid_items:
             item = {}
 
             # statement
