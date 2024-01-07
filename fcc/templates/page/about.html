@@ -37,20 +37,20 @@ a {
 
     <div class="two-col">
         <p>
-            This website, informally called Fact-Check Central, regularly retrieves 
-            fact-checking information from a selection of fact-checking websites.
-            The contents of this website are automatically updated several times a week.
+            This website, informally called Fact-Check Central (FCC), regularly retrieves 
+            information from a selection of fact-checking websites.
+            The contents of FCC are automatically updated several times a week.
             Clicking on an entry will take you to the corresponding page
-            on the fact-checking site.
+            on the originating fact-checking site.
         </p>
         <p>
             The format in which statements and their 
             "<a href="https://www.wordnik.com/words/truthiness">truthiness</a>" 
             ratings are published varies
-            between fact-checking websites. Some will publish the original statement, the source, and the
+            between fact-checking websites. Some sites will publish the original statement, the source, and the
             fact-checker's conclusion from a strict number of options, such as:
             true, false or misleading. Other websites take a less structured approach.
-            The different formats of the entries displayed here reflects that diversity in formats.
+            The different formats of the entries displayed on FCC reflects that diversity in formats.
         </p>
     </div>
 
@@ -65,22 +65,33 @@ a {
             "...for organizations that regularly publish nonpartisan reports on the accuracy of statements by public figures, major institutions, and other widely circulated claims of interest to society."
         </p>
         <p>
-            Signatories of the IFCN code of principles agree to abide by the code, and submit to yearly independent assessments
-            to retain their signatory status.
-            Organizations that appear on this website were chosen from the IFCN
+            Signatories to the IFCN code of principles agree to abide by the code, and 
+            submit to an annual independent assessment to retain their signatory status.
+            Organizations that appear on FCC were chosen from the IFCN
             <a href="https://ifcncodeofprinciples.poynter.org/signatories">list of signatories</a>.
         </p>
     </div>
 
-    <h2>Technology Used</h2>
+    <h2>Technologies Used</h2>
     <div class="two-col">
         <p>
-            The selected fact-checking websites are regularly visited and checked for new entries
-            using a technique called 
+            The fact-checking websites featured here are regularly visited and checked 
+            for new entries, using a technique called 
             <a href="https://en.wikipedia.org/wiki/Web_scraping"><em>web scraping</em></a>.
-            Scraping a web page consists of automating the fetching of the page, 
-            without human intervention. Portions of the page
-            (determined by an earlier analysis of the page's structure) are then saved.
+        </p>
+        <p>
+            Before scraping a web page, a human must analyze the page's structure (HTML)
+            to determine how to describe (in a computer program) the parts of the page 
+            that are of interest.
+            Next, a small program is written to "scrape" (i.e. retrieve) 
+            those parts of the web page.
+        </p>
+        <p>
+            Once the scraping program "knows" which parts of the web page we're interested in,
+            it can be executed to retrieve those parts.
+            Checking a website for new content merely requires executing the program
+            on a regular basis, and checking to see if any of the interesting parts
+            have changed.
         </p>
         <p>
             The following technologies were used to develop Fact-Check Central:
@@ -88,7 +99,7 @@ a {
         <ul>
             <li><a href="https://flask.palletsprojects.com">Flask</a></li>
             <li><a href="https://www.sqlalchemy.org">SQLAlchemy</a></li>
-            <li><a href="https://www.postgresql.org">Postgres</a></li>
+            <li><a href="https://www.postgresql.org">PostgreSQL</a></li>
             <li><a href="https://playwright.dev/python/">Playwright</a></li>
         </ul>
     </div>
