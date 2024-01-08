@@ -1,6 +1,7 @@
 from datetime import date
 import importlib
 import logging
+import traceback
 
 import click
 from flask import Blueprint, current_app
@@ -42,10 +43,14 @@ def scrape(args):
         class_ = getattr(module, f'{org.class_name}Scraper')
         
         # Let's go scraping!
-        scraper = class_()
-        scraper.init()
-        scraper.scrape(org)
-        scraper.close()
+        try:
+            scraper = class_()
+            scraper.init()
+            scraper.scrape(org)
+            scraper.close()
+        except Exception as err:
+            logging.error('Exception: %s', err)
+            logging.error('Traceback: %s', traceback.format_exc())
     
     logging.info('Scrape: end')
 
