@@ -1,6 +1,8 @@
 # /fcc/__init__.py
 
+import logging
 import re
+
 from flask import Flask
 
 
@@ -11,6 +13,8 @@ def create_app():
         app.config.from_pyfile('config_dev.py')
     else:
         app.config.from_pyfile('config_prod.py')
+
+    _config_logging()
 
     #
     # Database
@@ -37,3 +41,13 @@ def create_app():
         return re.sub(r'^https?://', '', url)
 
     return app
+
+
+def _config_logging():
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s %(levelname)s %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'    
+    )
+
+    # (Maybe one day I'll do something more sophisticated here...)

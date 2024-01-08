@@ -26,14 +26,6 @@ def seed():
 @bp.cli.command('scrape')
 @click.argument('args', nargs=-1)
 def scrape(args):
-    fn = 'scrape-' + date.today().strftime('%Y-%m') + '.log'
-    logging.basicConfig(
-        level=logging.DEBUG,
-        filename=current_app.config['LOG_DIR'] + '/' + fn,
-        format='%(asctime)s %(message)s',
-        datefmt='%Y.%m.%d %H:%M:%S'    
-    )
-    logging.info('')
     logging.info('Scrape: begin')
     logging.info(f'command: flask scrape {" ".join(args)}')
 
@@ -42,7 +34,6 @@ def scrape(args):
     # Scrape the "chosen ones" (or all)
     for org in orgs:
         logging.info('%s: %s', org.name, org.scrape_url)
-        click.echo(f'{org.name}...')
 
         # Dynamically load corresponding Scraper class
         # https://stackoverflow.com/a/4821120

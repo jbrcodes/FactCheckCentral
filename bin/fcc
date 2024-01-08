@@ -26,4 +26,4 @@ fi
 log_file=${log_dir}/flask-$(date +%Y-%m).log
 
 # Let's go!
-flask --app fcc $@ >> ${log_file} 2>> ${log_file}
+flask --app fcc $@ 2>> ${log_file}
