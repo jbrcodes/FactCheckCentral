@@ -21,7 +21,7 @@ then
 else
     # prod
     source ../env/bin/activate
-    log_dir=~/logs/fact_check_central/app
+    log_dir=~/logs/apps/fact_check_central
 fi
 log_file=${log_dir}/flask-$(date +%Y-%m).log
 
