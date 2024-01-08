@@ -1,24 +1,29 @@
-#!/bin/sh
+#!/bin/bash
 
 
-if [ ! "$1" ]
+if [[ ! "$1" ]]
 then
     echo "Usage: fcc <subcmd>"
     exit 1
 fi
 
-# Go to proj dir
-SCRIPT=$(readlink -f "$0")
-SCRIPTDIR=$(dirname "$SCRIPT")
-cd $SCRIPTDIR/..
+# Go to Flask proj dir
+script=$(readlink -f "$0")
+script_dir=$(dirname "$script")
+cd $script_dir/..
 
-# Activate venv (fragile!)
-if [ `hostname` = "pizarra-1.home" ]
+# Do host-specific stuff
+if [[ `hostname` = "pizarra-1.home" ]]
 then
+    # dev
     source venv-flask/bin/activate
+    log_dir=logs
 else
+    # prod
     source ../env/bin/activate
+    log_dir=~/logs/fact_check_central/app
 fi
+log_file=${log_dir}/flask-$(date +%Y-%m).log
 
 # Let's go!
-flask --app fcc $@
+flask --app fcc $@ >> ${log_file} 2>> ${log_file}
