@@ -5,9 +5,7 @@ venv*/
 cache/
 fabric/
 instance/
-logs/*.log
-
-JupyterLab/
-NOTES.md
-
+logs/
 .flaskenv
+
+NOTES.md
