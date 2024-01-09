@@ -16,7 +16,7 @@ cd $script_dir/..
 if [[ `hostname` = "pizarra-1.home" ]]
 then
     # dev
-    source venv-flask/bin/activate
+    source venv/bin/activate
     log_dir=logs
 else
     # prod
