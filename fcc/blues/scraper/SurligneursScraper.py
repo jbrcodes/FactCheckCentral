@@ -36,8 +36,14 @@ class SurligneursScraper(BaseScraper):
 
         # date
         source = self.page.query_selector('h2 a').text_content().strip()
-        date_str = re.search(r'((\d\d?) (\w+) (\d{4}))$', source).group(1)
-        detail['stmt_date_iso'] = self._to_iso_date_str(date_str)
+        match = re.search(r'((\d\d?) (\w+) (\d{4}))$', source)
+        # If no source date was found, use entry creation date
+        if match:
+            detail['stmt_date_iso'] = self._to_iso_date_str(match.group(1))
+        else:
+            arts_dates = self.page.query_selector('.articles-dates').text_content().strip()
+            match = re.search(r'((\d\d?) (\w+) (\d{4}))$', arts_dates)
+            detail['stmt_date_iso'] = self._to_iso_date_str(match.group(1))
 
         # summary
         detail['misc'] = self.page.query_selector('.correction p').text_content().strip()
