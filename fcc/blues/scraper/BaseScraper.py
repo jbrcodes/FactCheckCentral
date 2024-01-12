@@ -4,6 +4,7 @@ from datetime import date
 import locale
 import logging
 import time
+import traceback
 
 from flask import current_app
 
@@ -48,7 +49,13 @@ class BaseScraper:
 
     def scrape(self, org):
         self.org = org
-        index_items = self._scrape_page('index', org.scrape_url)
+        try:
+            index_items = self._scrape_page('index', org.scrape_url)
+        except Exception as err:
+            logging.error('Exception: %s', err)
+            logging.error('Traceback: %s', traceback.format_exc())
+            return
+        
         logging.info('%d items scraped', len(index_items))
         index_items = index_items[:self.SCRAPE_DETAIL_MAX]
         new_items = self._filter_new_items(index_items)
@@ -111,7 +118,13 @@ class BaseScraper:
             item1 = dict(item)
 
             # Integrate stuff from detail page if applicable
-            detail = self._scrape_page('detail', item1['stmt_url'])
+            try:
+                detail = self._scrape_page('detail', item1['stmt_url'])
+            except Exception as err:
+                logging.error('Exception: %s', err)
+                logging.error('Traceback: %s', traceback.format_exc())
+                continue
+
             if detail is not None:
                 item1 = item1 | detail
 
