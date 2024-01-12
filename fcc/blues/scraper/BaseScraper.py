@@ -36,7 +36,7 @@ class BaseScraper:
     def init(self):
         self.playwright = sync_playwright().start()
         self.browser = self.playwright.chromium.launch(headless=True)
-        # ua = 'Playwr1ght 1.40: FactCheckCentral (demo) | fcc.jbrcodes.com | info@jbrcodes.com'
+        # ua = 'Playwr1ght 1.30: FactCheckCentral (demo) | fcc.jbrcodes.com | info@jbrcodes.com'
         # self.browser = self.browser.new_context(user_agent=ua)
         self.page = self.browser.new_page()
     
@@ -50,8 +50,8 @@ class BaseScraper:
         self.org = org
         index_items = self._scrape_page('index', org.scrape_url)
         logging.info('%d items scraped', len(index_items))
+        index_items = index_items[:self.SCRAPE_DETAIL_MAX]
         new_items = self._filter_new_items(index_items)
-        new_items = new_items[:self.SCRAPE_DETAIL_MAX]
         tweaked_items = self._pre_save_items(new_items)
         self._save_items(tweaked_items)
         logging.info('%d new items saved', len(new_items))
