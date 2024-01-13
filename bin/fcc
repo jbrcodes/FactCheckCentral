@@ -23,7 +23,7 @@ else
     source ../env/bin/activate
     log_dir=~/logs/apps/fact_check_central
 fi
-log_file=${log_dir}/flask-$(date +%Y%m%d).log
+log_file=${log_dir}/flask.log
 
 # Let's go!
 flask --app fcc $@ 2>> ${log_file}
