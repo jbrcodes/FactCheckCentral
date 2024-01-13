@@ -4,9 +4,13 @@
  * Global
  *****/
 
- * {
+* {
     box-sizing: border-box;
- }
+}
+
+h2 {
+    font-family: 'EB Garamond', serif;
+}
 
 .index .bi.bi-box-arrow-up-right {
     position: relative;
