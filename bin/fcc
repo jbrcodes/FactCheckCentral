@@ -13,7 +13,7 @@ script_dir=$(dirname "$script")
 cd $script_dir/..
 
 # Do host-specific stuff
-if [[ `hostname` = "pizarra-1.home" ]]
+if [[ `hostname` = "pizarra.home" ]]
 then
     # dev
     source venv/bin/activate
