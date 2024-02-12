@@ -39,8 +39,8 @@ class SnopesScraper(BaseScraper):
         elem = self.page.query_selector('div.rating_title_wrap')
         if elem:
             # (I wish I could grab the first text node in elem...)
-            messy_rating = elem.text_content()
-            detail['rating'] = re.search(r'\n\t+((\w| )+)\t+\n', messy_rating).group(1)
+            messy_rating = elem.inner_html()
+            detail['rating'] = re.search(r'^\s+([\w ]+)\s+<div', messy_rating).group(1)
         else:
             # (I'm not sure this is even possible)
             detail['rating'] = '(none found)'
