@@ -50,8 +50,8 @@ class SnopesScraper(BaseScraper):
 
     def _to_iso_date_str(self, date_str):
         # Get the original date in case there is original & updated date
-        first_date_str = re.search(r'(\w{3} \d\d?, \d{4})', date_str).group(1)
-        iso_datetime = datetime.strptime(first_date_str, '%b %d, %Y').isoformat()
+        first_date_str = re.search(r'(\w+ \d\d?, \d{4})', date_str).group(1)
+        iso_datetime = datetime.strptime(first_date_str, '%B %d, %Y').isoformat()
         iso_date = re.sub(r'T.*', '', iso_datetime)
 
         return iso_date
