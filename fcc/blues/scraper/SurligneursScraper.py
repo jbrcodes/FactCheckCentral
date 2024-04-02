@@ -16,15 +16,15 @@ class SurligneursScraper(BaseScraper):
             item = {}
 
             # statement
-            item['stmt_text'] = grid_item.query_selector('button + p').text_content()
             item['stmt_url'] = grid_item.query_selector('a').get_attribute('href')
+            item['stmt_text'] = grid_item.query_selector('p').text_content().strip()
             item['stmt_date_iso'] = ''  # from detail page
 
             # summary
             item['misc'] = ''  # from detail page
 
             # rating
-            item['rating'] = grid_item.query_selector('button').text_content()
+            item['rating'] = grid_item.query_selector('button.etiquette').text_content().strip()
 
             all_items.append(item)
 
