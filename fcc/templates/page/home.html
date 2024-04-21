@@ -5,11 +5,11 @@
 
 {%
     set org_logos = {
-        'dpa': 'https://ifcncodeofprinciples.poynter.org/storage/logos/dpa-deutsche-presse-agentur-gmbh_logo.png',
-        'newtral': 'https://ifcncodeofprinciples.poynter.org/storage/logos/newtral_logo.png',
-        'politifact': 'https://ifcncodeofprinciples.poynter.org/storage/logos/politifact_logo.png',
-        'snopes': 'https://ifcncodeofprinciples.poynter.org/storage/logos/snopescom_logo.png',
-        'surligneurs': 'https://ifcncodeofprinciples.poynter.org/storage/logos/les-surligneurs_logo.png'
+        'dpa': { 'fn': 'dpa.png', 'height': '100%' },
+        'newtral': { 'fn': 'newtral.png', 'height': '100%' },
+        'politifact': { 'fn': 'politifact.png', 'height': '70%' },
+        'snopes': { 'fn': 'snopes.png', 'height': '130%' },
+        'surligneurs': { 'fn': 'surligneurs.jpg', 'height': '65%' }
     }
 %}
 
@@ -31,18 +31,21 @@ h2 {
 .org-info {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
+}
+
+.logo-div {
+    height: 1.5em;
+}
+
+@media screen and (min-width: 600px) {
+    .logo-div {
+        height: 3em;
+    }
 }
 
 .org-info img {
-    height: 100px;
     width: auto;
-}
-
-@media screen and (min-width: 700px) {
-    .org-info img {
-        height: 150px;
-    }
 }
 
 #jumbo {
@@ -70,13 +73,11 @@ h2 {
 #spruch {
     font-weight: 600;
     font-size: 4em;
-    line-height: .9em;
 }
 
 #smalltext {
     font-weight: 400;
     font-size: 1.5em;
-    line-height: 1.6em;
 }
 {% endblock %}
 
@@ -105,7 +106,13 @@ h2 {
                 Website: <a href="{{ org.site_url }}">{{ org.site_url|strip_http }}</a>
             </div>
 
-            <img src="{{ org_logos[org.slug] }}" alt="{{ org.name }} logo">
+            <div class="logo-div">
+                <img 
+                    src="{{ url_for('static', filename='logos/'+org_logos[org.slug]['fn']) }}" 
+                    alt="{{ org.name }} logo"
+                    style="height: {{ org_logos[org.slug]['height'] }}"
+                >
+            </div>
         </div>
 
         <div class="check-card-grid">
