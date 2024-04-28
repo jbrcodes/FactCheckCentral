@@ -43,6 +43,14 @@ all_orgs_data = [
         'class_name': 'Snopes',
         'site_url': 'https://www.snopes.com',
         'scrape_url': 'https://www.snopes.com/fact-check/'
+    },{
+        'name': 'Verificat',
+        'country': 'Spain',
+        'locale': 'ca_ES',
+        'slug': 'verificat',
+        'class_name': 'Verificat',
+        'site_url': 'https://www.verificat.cat',
+        'scrape_url': 'https://www.verificat.cat/fact-checking/'
     }
 ]
 

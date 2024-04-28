@@ -132,3 +132,25 @@
     </div>
 </a>
 {% endmacro %}
+
+
+{% macro verificat_Card(ch) %}
+<a href="{{ ch.stmt_url }}" target="_blank" title="Go to Verificat page">
+    <div class="CheckCard">
+        <div class="scrollable">
+            <div class="date">{{ ch.stmt_date_locale }}</div>
+            <div class="stmt">{{ ch.stmt_text }}</div>
+            <div class="summary">{{ ch.misc }}</div>
+        </div>
+
+        <div class="bottom">
+            <span></span>
+
+            <span class="btn btn-primary btn-sm">
+                go
+                <i class="bi bi-box-arrow-up-right"></i> 
+            </span>
+        </div>
+    </div>
+</a>
+{% endmacro %}
