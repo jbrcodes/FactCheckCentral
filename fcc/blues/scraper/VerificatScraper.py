@@ -6,6 +6,25 @@ import re
 from fcc.blues.scraper.BaseScraper import BaseScraper
 
 
+# I have to convert Verificat's "unconventional" months in Catalan from the index page
+# because some detail pages don't contain the date!!!
+
+VERIFICAT_MONTHS = {
+    'gen.': 'jan',
+    'febr.': 'feb',
+    'març': 'mar',
+    'abr.': 'apr',
+    'maig': 'may',
+    'juny': 'jun',
+    'jul.': 'jul',
+    'ag.': 'aug',
+    'set.': 'sep',
+    'oct.': 'oct',
+    'nov.': 'nov',
+    'des.': 'dec'
+}
+
+
 class VerificatScraper(BaseScraper):
 
     def _scrape_index_page(self):
@@ -19,6 +38,10 @@ class VerificatScraper(BaseScraper):
             item['stmt_text'] = a.text_content().strip()
             item['stmt_url'] = a.get_attribute('href')
 
+            # date
+            cat_date_str = post.query_selector('span.ultp-block-date').text_content().strip()
+            item['stmt_date_iso'] = self._to_iso_date_str(cat_date_str)
+
             # summary (from detail page)
             item['misc'] = ''
             
@@ -27,28 +50,20 @@ class VerificatScraper(BaseScraper):
         return all_items
 
 
-    # def _wait_for_page_load(self, type):
-    #     if type == 'index':
-    #         self.page.wait_for_function('() => document.getElementById("scroll-load-more").hidden === false')
-
-
     def _scrape_detail_page(self):
         detail = {}
-
-        iso_datetime = self.page.query_selector('main time').get_attribute('datetime')
-        detail['stmt_date_iso'] = re.sub(r'T.*', '', iso_datetime)
 
         detail['misc'] = self.page.query_selector('main .post_subtitle p').text_content().strip()
         
         return detail
 
 
-    # def _to_iso_date_str(self, date_str):
-    #     """ Site doesn't use "official" month abbreviations? """
-    #     # ensure month is only 3 letters
-    #     m = re.match(r'(\S+) (\d\d?), (\d{4})', date_str)
-    #     date1 = f'{MONTHS[m.group(1)]} {m.group(2)}, {m.group(3)}'
-    #     iso_datetime = datetime.strptime(date1, '%b %d, %Y').isoformat()
-    #     iso_date = re.sub(r'T.*', '', iso_datetime)
+    def _to_iso_date_str(self, cat_date_str):
+        """ index page does not use 'official' Catalan abbreviated months """
 
-    #     return iso_date
+        m = re.match(r'(\S+) (\d\d?), (\d{4})', cat_date_str)
+        date1 = f'{VERIFICAT_MONTHS[m.group(1)]} {m.group(2)}, {m.group(3)}'
+        iso_datetime = datetime.strptime(date1, '%b %d, %Y').isoformat()
+        iso_date = re.sub(r'T.*', '', iso_datetime)
+
+        return iso_date
