@@ -100,7 +100,7 @@ h2 {
 <div class="jbr-container">
     {% for org in orgs %}
     <div class="org-block">
-        <h2>{{ org.name }}</h2>
+        <h2 id="{{ org.slug }}">{{ org.name }}</h2>
         <div class="org-info">
             <div>
                 <div>Country: {{ org.country }}</div>
