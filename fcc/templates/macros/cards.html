@@ -7,7 +7,9 @@
         <div class="scrollable">
             <div class="date">{{ ch.stmt_date_locale }}</div>
             <div class="stmt">{{ ch.stmt_text }}</div>
-            <div class="summary">{{ ch.misc }}</div>
+            {% if ch.misc != '' %}
+                <div class="summary">{{ ch.misc }}</div>
+            {% endif %}
         </div>
 
         <div class="bottom">

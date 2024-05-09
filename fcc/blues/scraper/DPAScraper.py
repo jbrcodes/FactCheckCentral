@@ -56,8 +56,13 @@ class DPAScraper(BaseScraper):
     def _scrape_detail_page(self):
         # Get the summary from the detail page if we didn't get it from a teaser
         # (Note: This gets the detail page even if we got the summary from the teaser)
+        # (Another note: Teaser is normally provided, but not always)
         tease = self.page.query_selector('article .teaser')
-        detail = { 'misc': tease.text_content().strip() }
+        detail = {}
+        if tease is None:
+            detail['misc'] = ''
+        else:
+            detail['misc'] = tease.text_content().strip()
         
         return detail
     
