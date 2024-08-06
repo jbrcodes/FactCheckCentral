@@ -11,13 +11,14 @@ class SnopesScraper(BaseScraper):
     def _scrape_index_page(self):
         all_items = []
 
-        articles = self.page.query_selector_all('#list_template_wrapper .article_wrapper')
+        articles = self.page.query_selector_all('#article-list .article_wrapper')
         for art in articles:
             item = {}
 
             # statement
-            item['stmt_text'] = art.query_selector('h3.article_title').text_content().strip()
             item['stmt_url'] = art.query_selector('a.outer_article_link_wrapper').get_attribute('href')
+            item['stmt_text'] = art.query_selector('h3.article_title').text_content().strip()
+
             artdate = art.query_selector('span.article_date').text_content().strip()
             item['stmt_date_iso'] = self._to_iso_date_str(artdate)
 
@@ -49,9 +50,13 @@ class SnopesScraper(BaseScraper):
 
 
     def _to_iso_date_str(self, date_str):
-        # Get the original date in case there is original & updated date
-        first_date_str = re.search(r'(\w+ \d\d?, \d{4})', date_str).group(1)
-        iso_datetime = datetime.strptime(first_date_str, '%B %d, %Y').isoformat()
+        # Match 3 pieces...
+        m = re.search(r'(\S+) (\d\d?), (\d{4})', date_str)
+        # Use only first 3 chars of month (to avoid hassle of abbreviations)
+        mo = m.group(1)[:3]
+        # Re-assemble
+        date_str1 = f"{mo} {m.group(2)}, {m.group(3)}"
+        iso_datetime = datetime.strptime(date_str1, '%b %d, %Y').isoformat()
         iso_date = re.sub(r'T.*', '', iso_datetime)
 
         return iso_date
