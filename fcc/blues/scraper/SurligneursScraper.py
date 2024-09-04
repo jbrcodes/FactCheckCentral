@@ -34,8 +34,8 @@ class SurligneursScraper(BaseScraper):
     def _scrape_detail_page(self):
         detail = {}
 
-        # date
-        source = self.page.query_selector('h2 a').text_content().strip()
+        # date: Source may or may not contain a link
+        source = self.page.query_selector('h2').text_content().strip()
         match = re.search(r'((\d\d?) (\w+) (\d{4}))$', source)
         # If no source date was found, use entry creation date
         if match:
