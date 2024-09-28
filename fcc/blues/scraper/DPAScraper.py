@@ -68,7 +68,8 @@ class DPAScraper(BaseScraper):
     
 
     def _to_iso_date_str(self, datetime_str):
-        iso_datetime = datetime.strptime(datetime_str[:10], '%d.%m.%Y').isoformat()
+        date_str = re.match(r'(\d+\.\d+\.\d{4})', datetime_str).group(1)
+        iso_datetime = datetime.strptime(date_str, '%d.%m.%Y').isoformat()
         iso_date = re.sub(r'T.*', '', iso_datetime)
 
         return iso_date
