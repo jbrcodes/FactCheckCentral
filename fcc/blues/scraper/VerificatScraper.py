@@ -53,7 +53,13 @@ class VerificatScraper(BaseScraper):
     def _scrape_detail_page(self):
         detail = {}
 
-        detail['misc'] = self.page.query_selector('main .post_subtitle p').text_content().strip()
+        # There isn't always a summary/subtitle
+        subt = self.page.query_selector('main .post_subtitle')
+        if subt:
+            detail['misc'] = subt.query_selector('p').text_content().strip()
+        else:
+            detail['misc'] = ''
+        # detail['misc'] = self.page.query_selector('main .post_subtitle p').text_content().strip()
         
         return detail
 
