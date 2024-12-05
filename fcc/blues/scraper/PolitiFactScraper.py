@@ -9,6 +9,7 @@ from fcc.blues.scraper.BaseScraper import BaseScraper
 Rating_Strings = {
     'barely-true': 'Barely true',
     'false': 'False',
+    'full-flop': 'Full flop',
     'half-true': 'Half true',
     'mostly-true': 'Mostly true',
     'pants-fire': 'Pants on fire!',
