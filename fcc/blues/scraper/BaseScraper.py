@@ -16,7 +16,7 @@ from fcc.lib.FileCache import FileCache
 
 class BaseScraper:
     
-    SCRAPE_DETAIL_MAX = 10  # max number of new detail pages to scrape
+    SCRAPE_DETAIL_MAX = 3  # max number of new detail pages to scrape
     DETAIL_PAUSE_SECS = 3  # pause this long before scraping a detail page
 
 
@@ -99,8 +99,9 @@ class BaseScraper:
         for item in all_items:
             stmt = (
                 db.select(Check)
-                    .where(Check.organization_id == self.org.id)
-                    .where(Check.stmt_text == item['stmt_text'])
+                    .where(Check.stmt_url == item['stmt_url'])
+                    # .where(Check.organization_id == self.org.id)
+                    # .where(Check.stmt_text == item['stmt_text'])
             )
             if db.session.execute(stmt).first() is None:
                 new_items.append(item)
