@@ -10,44 +10,37 @@ class NewtralScraper(BaseScraper):
 
     def _scrape_index_page(self):
         all_items = []
-        cards = self.page.query_selector_all('section.s-verification-cards div[id^="item"]')
+        cards = self.page.query_selector_all('#vog-verificaton-list .card-featured-archive')
         for card in cards:
             item = {}
 
-            # statement
-            a = card.query_selector('mark a')
-            item['stmt_text'] = a.text_content().strip()
-            item['stmt_url'] = a.get_attribute('href')
-            item['stmt_date_iso'] = ''  # temporary; the date's on the detail page
+            date_str = card.query_selector('.card-meta-date').text_content().strip()
+            item['stmt_date_iso'] = self._to_iso_date_str(date_str)
 
-            # author
-            who = card.query_selector('.c-card__verification__who')
-            item['author_name'] = who.query_selector('.c-card__verification__who__name').text_content().strip()
-            item['author_title'] = who.query_selector('.c-card__verification__who__position').text_content().strip()
-
-            # rating
-            item['rating'] = card.query_selector('aside .c-card__verification__rating__text').text_content().strip()
+            item['stmt_url'] = card.query_selector('.card-body a').get_attribute('href')
             
             all_items.append(item)
 
         return all_items
 
 
-    def _wait_for_page_load(self, type):
-        if type == 'index':
-            self.page.wait_for_function('() => document.getElementById("scroll-load-more").hidden === false')
-
-
     def _scrape_detail_page(self):
-        # Get the date in format 'dd-mm-yy'
-        when = self.page.query_selector('.c-card__verification__when').text_content().strip()
-        detail = { 'stmt_date_iso': self._to_iso_date_str(when) }
+        detail = {}
+        card = self.page.query_selector('.section-post-single-card .card-body')
+
+        detail['stmt_text'] = card.query_selector('mark').text_content().strip()
+
+        author = card.query_selector('.card-author-text')
+        detail['author_name'] = author.query_selector('span').text_content().strip()
+        detail['author_title'] = author.inner_html().split('<br>')[1].strip()
+
+        detail['rating'] = card.query_selector('.card-factcheck-result-text').text_content().strip()
         
         return detail
 
 
     def _to_iso_date_str(self, date_str):
-        iso_datetime = datetime.strptime(date_str, '%d-%m-%y').isoformat()
+        iso_datetime = datetime.strptime(date_str, '%d/%m/%Y').isoformat()
         iso_date = re.sub(r'T.*', '', iso_datetime)
 
         return iso_date
