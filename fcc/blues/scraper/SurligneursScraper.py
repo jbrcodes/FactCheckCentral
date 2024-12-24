@@ -46,11 +46,8 @@ class SurligneursScraper(BaseScraper):
             detail['stmt_date_iso'] = self._to_iso_date_str(match.group(1))
 
         # summary
-        # <div class="correction"> has either a <p> child or <span> grandchild that contains text
-        summ = self.page.query_selector('.correction p')
-        if summ == None:
-            summ = self.page.query_selector('.correction span')
-        detail['misc'] = summ.text_content().strip()
+        # <div class="correction"> can have many different formats; just grab all text
+        detail['misc'] = self.page.query_selector('.correction').text_content().strip()
         
         return detail
     
