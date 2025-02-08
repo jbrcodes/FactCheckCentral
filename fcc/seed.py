@@ -34,7 +34,7 @@ all_orgs_data = [
         'slug': 'surligneurs',
         'class_name': 'Surligneurs',
         'site_url': 'https://www.lessurligneurs.eu',
-        'scrape_url': 'https://www.lessurligneurs.eu/surlignage/'
+        'scrape_url': 'https://lessurligneurs.eu/fact-checking/'
     },{
         'name': 'Snopes',
         'country': 'USA',
